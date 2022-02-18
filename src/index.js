@@ -1,26 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
+import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Webs from "./pages/Webs";
-import Contact from "./pages/Contact";
-import Web from "./pages/Web";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<Router>
-			<Routes>
-				<Route path="/" element={<App />}>
-					<Route path="web" element={<Webs />}>
-						<Route index element={<p>select website</p>} />
-						<Route path=":id" element={<Web />} />
-					</Route>
-					<Route path="contact" element={<Contact />} />
-				</Route>
-			</Routes>
-		</Router>
+		<App />
 	</React.StrictMode>,
 	document.getElementById("root")
 );
