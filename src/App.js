@@ -15,7 +15,7 @@ const App = () => {
 
 	return (
 		<div>
-			<h1>Khoa</h1>
+			<h1>Khoa1</h1>
 			<h1>{counter}</h1>
 			<input type="number" value={value} onChange={handleValueChange}></input>
 			<button onClick={() => dispatch(increase(value))}>in</button>
