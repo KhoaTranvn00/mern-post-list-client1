@@ -1,26 +1,32 @@
-import React from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { decrease, increase } from "./action/counter";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginForm from "./components/auth/LoginForm";
+import RegisterForm from "./components/auth/RegisterForm";
+import About from "./components/page/About";
+import Auth from "./components/page/Auth";
+import Dashboard from "./components/page/Dashboard";
+import Landing from "./components/page/Landing";
+import ProtectedRoute from "./components/page/ProtectedRoute";
+import AuthContextProvider from "./context/AuthContext";
+import PostContextProvider from "./context/PostContext";
 const App = () => {
-	const counter = useSelector((state) => state.counter);
-	const dispatch = useDispatch();
-
-	const [value, setValue] = useState(0);
-
-	const handleValueChange = (e) => {
-		setValue(e.target.value);
-	};
-
 	return (
-		<div>
-			<h1>Khoa1</h1>
-			<h1>{counter}</h1>
-			<input type="number" value={value} onChange={handleValueChange}></input>
-			<button onClick={() => dispatch(increase(value))}>in</button>
-			<button onClick={() => dispatch(decrease(value))}>de</button>
-		</div>
+		<AuthContextProvider>
+			<PostContextProvider>
+				<Router>
+					<Routes>
+						<Route path="/" element={<Landing />} />
+						<Route path="account" element={<Auth />}>
+							<Route path="login" element={<LoginForm />} />
+							<Route path="register" element={<RegisterForm />} />
+						</Route>
+						<Route element={<ProtectedRoute />}>
+							<Route path="dashboard" element={<Dashboard />} />
+							<Route path="about" element={<About />} />
+						</Route>
+					</Routes>
+				</Router>
+			</PostContextProvider>
+		</AuthContextProvider>
 	);
 };
 
